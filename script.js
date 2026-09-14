@@ -217,8 +217,55 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // --------------------------------------------------------------------------
-  // 4. MOBIL MENYU (HAMBURGER DRAWER) & SCROLLSPY
+  // 4. NAVBAR INTERAKTIV DROPDOWN & MOBIL MENYU (HAMBURGER DRAWER) & SCROLLSPY
   // --------------------------------------------------------------------------
+  // Navbar Dropdown (Interaktiv bo'limlar)
+  const navDropdownBtn = document.getElementById("nav-dropdown-btn");
+  const navDropdownMenu = document.getElementById("nav-dropdown-menu");
+
+  if (navDropdownBtn && navDropdownMenu) {
+    navDropdownBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      playKeyClick("key");
+      const isOpen = navDropdownMenu.classList.contains("open");
+      if (isOpen) {
+        navDropdownMenu.classList.remove("open");
+        navDropdownBtn.classList.remove("active");
+      } else {
+        navDropdownMenu.classList.add("open");
+        navDropdownBtn.classList.add("active");
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!navDropdownMenu.contains(e.target) && e.target !== navDropdownBtn) {
+        navDropdownMenu.classList.remove("open");
+        navDropdownBtn.classList.remove("active");
+      }
+    });
+
+    navDropdownMenu.querySelectorAll(".dropdown-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        navDropdownMenu.classList.remove("open");
+        navDropdownBtn.classList.remove("active");
+        playKeyClick("enter");
+      });
+    });
+  }
+
+  // Sahifa aylantirilganda Navbar shisha orolchasini yanada ixchamlashtirish
+  const navbarWrapper = document.querySelector(".navbar-wrapper");
+  window.addEventListener("scroll", () => {
+    if (navbarWrapper) {
+      if (window.pageYOffset > 30) {
+        navbarWrapper.classList.add("scrolled");
+      } else {
+        navbarWrapper.classList.remove("scrolled");
+      }
+    }
+  });
+
+  // Mobil Menyu
   const menuToggleBtn = document.getElementById("menu-toggle-btn");
   const mobileMenuDrawer = document.getElementById("mobile-menu-drawer");
   const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
@@ -278,6 +325,143 @@ document.addEventListener("DOMContentLoaded", () => {
         link.classList.add("active");
       }
     });
+  });
+
+  // --------------------------------------------------------------------------
+  // 4.1 COMMAND PALETTE & TEZKOR QIDIRUV (CTRL + K)
+  // --------------------------------------------------------------------------
+  const quickSearchBtn = document.getElementById("quick-search-btn");
+  const quickSearchModal = document.getElementById("quick-search-modal");
+  const quickSearchBackdrop = document.getElementById("search-modal-backdrop");
+  const quickSearchInput = document.getElementById("quick-search-input");
+  const searchCloseBtn = document.getElementById("search-close-btn");
+  const searchResultsList = document.getElementById("search-results-list");
+
+  const navigationIndex = [
+    { title: "Bosh sahifa", category: "Bo'lim", hash: "#home", icon: "🏠", keywords: "bosh sahifa hero kirish bobur mirboboyev" },
+    { title: "Men haqimda", category: "Bo'lim", hash: "#about", icon: "👨‍💻", keywords: "haqimda yosh maktab 10-maktab intizom falsafa" },
+    { title: "Ko'nikmalar va Vositalar", category: "Bo'lim", hash: "#skills", icon: "⚡", keywords: "skills html css javascript obsidian git dsa" },
+    { title: "Obsidian Bilimlar Grafigi", category: "Interaktiv", hash: "#brain-graph", icon: "🧠", keywords: "ikkinchi miya second brain graph tarmoq bilimlar" },
+    { title: "Google Sari Yo'l Xaritasi", category: "Reja", hash: "#roadmap", icon: "🗺️", keywords: "roadmap yo'l xaritasi senior engineer google maqsad" },
+    { title: "Tanlangan Loyihalar", category: "Loyihalar", hash: "#projects", icon: "📂", keywords: "loyihalar barcha amaliy ishlar portfolio" },
+    { title: "Supermarket POS Kassa Tizimi", category: "Loyiha", hash: "#projects", icon: "🛒", keywords: "pos supermarket kassa skaner shtrix chek" },
+    { title: "Bobur dasturchi Portfolio 2.0", category: "Loyiha", hash: "#projects", icon: "💎", keywords: "portfolio sayt dark mode glassmorphism cli" },
+    { title: "E-Commerce Savat & Buyurtma", category: "Loyiha", hash: "#projects", icon: "🛍️", keywords: "savat savdo mahsulot narx do'kon" },
+    { title: "Mars Space Xakaton Ishi", category: "Loyiha", hash: "#projects", icon: "🚀", keywords: "xakaton hackathon mars innovatsiya" },
+    { title: "Dasturchi Viktorinasi (Test)", category: "O'yin", hash: "#quiz", icon: "🎮", keywords: "quiz viktorina test savollar o'yin ball" },
+    { title: "Mars IT School & Mars Space", category: "Ta'lim", hash: "#mars-space", icon: "🪐", keywords: "mars space it maktab mars coins gamifikatsiya" },
+    { title: "Mehmonlar Kitobi & Fikrlar", category: "Muloqot", hash: "#guestbook", icon: "✍️", keywords: "mehmonlar doska tilak izoh fikr telegram" },
+    { title: "Telegram Profil (@Mirboboyev_08)", category: "Aloqa", hash: "#contact", icon: "✈️", keywords: "telegram aloqa mirboboyev bog'lanish chat" },
+    { title: "Telefon Qo'ng'iroq (+998 99 138-08-10)", category: "Aloqa", hash: "#contact", icon: "📞", keywords: "telefon aloqa nomer sms qo'ng'iroq" },
+  ];
+
+  function openCommandPalette() {
+    if (!quickSearchModal) return;
+    quickSearchModal.classList.add("open");
+    document.body.style.overflow = "hidden";
+    if (quickSearchInput) {
+      quickSearchInput.value = "";
+      quickSearchInput.focus();
+    }
+    renderSearchResults("");
+    playKeyClick("enter");
+  }
+
+  function closeCommandPalette() {
+    if (!quickSearchModal) return;
+    quickSearchModal.classList.remove("open");
+    document.body.style.overflow = "";
+    playKeyClick("key");
+  }
+
+  function renderSearchResults(query) {
+    if (!searchResultsList) return;
+    const cleanQuery = query.toLowerCase().trim();
+
+    const filtered = navigationIndex.filter((item) => {
+      if (!cleanQuery) return true;
+      return (
+        item.title.toLowerCase().includes(cleanQuery) ||
+        item.category.toLowerCase().includes(cleanQuery) ||
+        item.keywords.toLowerCase().includes(cleanQuery)
+      );
+    });
+
+    if (filtered.length === 0) {
+      searchResultsList.innerHTML = `
+        <div class="search-empty-state">
+          <span>🔍</span>
+          <p>Hech qanday bo'lim yoki loyiha topilmadi.</p>
+        </div>
+      `;
+      return;
+    }
+
+    searchResultsList.innerHTML = filtered
+      .map(
+        (item, index) => `
+        <div class="search-item ${index === 0 ? "selected" : ""}" data-hash="${item.hash}">
+          <div class="search-item-icon">${item.icon}</div>
+          <div class="search-item-info">
+            <strong>${escapeHtml(item.title)}</strong>
+            <span class="search-item-category">${item.category}</span>
+          </div>
+          <span class="search-item-arrow">→</span>
+        </div>
+      `
+      )
+      .join("");
+
+    searchResultsList.querySelectorAll(".search-item").forEach((el) => {
+      el.addEventListener("click", () => {
+        const hash = el.getAttribute("data-hash");
+        closeCommandPalette();
+        playKeyClick("enter");
+        const target = document.querySelector(hash);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+  }
+
+  if (quickSearchBtn) {
+    quickSearchBtn.addEventListener("click", openCommandPalette);
+  }
+  if (searchCloseBtn) {
+    searchCloseBtn.addEventListener("click", closeCommandPalette);
+  }
+  if (quickSearchBackdrop) {
+    quickSearchBackdrop.addEventListener("click", closeCommandPalette);
+  }
+
+  if (quickSearchInput) {
+    quickSearchInput.addEventListener("input", (e) => {
+      renderSearchResults(e.target.value);
+    });
+
+    quickSearchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const firstItem = searchResultsList.querySelector(".search-item");
+        if (firstItem) {
+          firstItem.click();
+        }
+      }
+    });
+  }
+
+  // Klaviatura qisqa buyrug'i (Ctrl+K yoki Cmd+K)
+  window.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      if (quickSearchModal && quickSearchModal.classList.contains("open")) {
+        closeCommandPalette();
+      } else {
+        openCommandPalette();
+      }
+    } else if (e.key === "Escape" && quickSearchModal && quickSearchModal.classList.contains("open")) {
+      closeCommandPalette();
+    }
   });
 
   // --------------------------------------------------------------------------
