@@ -1,52 +1,116 @@
 <!doctype html>
-<html lang="uz">
+<html lang="uz" data-theme="cyber">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bobur dasturchi | Shaxsiy Portfolio</title>
+    <title>Bobur dasturchi | Shaxsiy Portfolio 2.0</title>
     <meta
       name="description"
-      content="Bobur Mirboboyev — 13 yoshli iqtidorli Frontend dasturchi. Maqsad: Senior darajasiga erishish va Google kompaniyasiga ishga kirish."
+      content="Bobur Mirboboyev — 13 yoshli iqtidorli Frontend dasturchi. Maqsad: Senior darajasiga erishish va Google kompaniyasiga dasturchi bo'lib kirish."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Orqa fon nurlari va effektlar -->
+    <!-- 0. Sahifa o'qish jarayoni indikatori (Scroll Progress Bar) -->
+    <div id="scroll-progress-bar" class="scroll-progress-bar"></div>
+
+    <!-- Orqa fon kiber effektlari va Matrix Canvas -->
+    <canvas id="matrix-rain-canvas" class="matrix-canvas"></canvas>
+    <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
     <div class="glow-sphere glow-1"></div>
     <div class="glow-sphere glow-2"></div>
+    <div class="glow-sphere glow-3"></div>
     <div class="grid-overlay"></div>
+
+    <!-- Mobil Menyu Qoplami (Overlay) -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+
+    <!-- Mobil Menyu Tortmasi (Drawer) -->
+    <div id="mobile-menu-drawer" class="mobile-menu-drawer">
+      <div class="mobile-menu-header">
+        <a href="#home" class="brand">
+          <span class="brand-badge">&lt;/&gt;</span>
+          <span class="brand-name">Bobur<span class="gradient-text">.dev</span></span>
+        </a>
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a href="#home" class="mobile-nav-link">🏠 Bosh sahifa</a></li>
+        <li><a href="#about" class="mobile-nav-link">👨‍💻 Men haqimda</a></li>
+        <li><a href="#skills" class="mobile-nav-link">⚡ Ko'nikmalar</a></li>
+        <li><a href="#brain-graph" class="mobile-nav-link">🧠 Bilimlar Grafigi</a></li>
+        <li><a href="#roadmap" class="mobile-nav-link">🗺️ Google Yo'l xaritasi</a></li>
+        <li><a href="#projects" class="mobile-nav-link">📂 Loyihalar</a></li>
+        <li><a href="#quiz" class="mobile-nav-link">🎮 IT Viktorina</a></li>
+        <li><a href="#mars-space" class="mobile-nav-link">🪐 Mars Space</a></li>
+        <li><a href="#guestbook" class="mobile-nav-link">✍️ Mehmonlar Kitobi</a></li>
+        <li><a href="#contact" class="mobile-nav-link">📞 Bog'lanish</a></li>
+      </ul>
+      <div class="mobile-menu-footer">
+        <p>Bobur dasturchi &bull; <span class="dynamic-age">13</span> yosh</p>
+      </div>
+    </div>
 
     <!-- Yuqori navigatsiya paneli (Glassmorphism Navbar) -->
     <header class="navbar-wrapper">
       <nav class="navbar container">
         <a href="#home" class="brand">
           <span class="brand-badge">&lt;/&gt;</span>
-          <span class="brand-name"
-            >Bobur<span class="gradient-text">.dev</span></span
-          >
+          <span class="brand-name">Bobur<span class="gradient-text">.dev</span></span>
         </a>
 
         <ul class="nav-links">
           <li><a href="#home" class="nav-link active">Bosh sahifa</a></li>
           <li><a href="#about" class="nav-link">Men haqimda</a></li>
           <li><a href="#skills" class="nav-link">Ko'nikmalar</a></li>
-          <li><a href="#roadmap" class="nav-link">Google Yo'l xaritasi</a></li>
+          <li><a href="#brain-graph" class="nav-link">Bilimlar</a></li>
+          <li><a href="#roadmap" class="nav-link">Yo'l xaritasi</a></li>
           <li><a href="#projects" class="nav-link">Loyihalar</a></li>
+          <li><a href="#quiz" class="nav-link">Viktorina</a></li>
           <li>
-            <a href="#mars-space" class="nav-link nav-mars"
-              ><span class="mars-dot"></span>Mars Space</a
-            >
+            <a href="#mars-space" class="nav-link nav-mars">
+              <span class="mars-dot"></span>Mars Space
+            </a>
           </li>
+          <li><a href="#guestbook" class="nav-link">Doska</a></li>
         </ul>
 
         <div class="nav-actions">
-          <a href="#contact" class="btn btn-outline-sm">Bog'lanish</a>
+          <!-- Mavzu ranglari palitrasi -->
+          <div class="theme-palette" title="Neon rang mavzusini tanlang">
+            <button class="theme-option theme-cyber active" data-theme-name="cyber" title="Cyber Violet"></button>
+            <button class="theme-option theme-mars" data-theme-name="mars" title="Mars Flame"></button>
+            <button class="theme-option theme-matrix" data-theme-name="matrix" title="Emerald Matrix"></button>
+            <button class="theme-option theme-google" data-theme-name="google" title="Google Blue"></button>
+          </div>
+
+          <!-- Tovush effekti tugmasi -->
+          <button id="sound-toggle-btn" class="icon-btn" title="Klaviatura chertish tovushlari">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <line x1="23" y1="9" x2="17" y2="15"></line>
+              <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+          </button>
+
+          <!-- Kiber Matrix Yomg'ir tugmasi -->
+          <button id="matrix-toggle-btn" class="icon-btn" title="Matrix effekti">
+            <span style="font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: #22c55e;">01</span>
+          </button>
+
+          <a href="#contact" class="btn btn-outline-sm d-none-mobile">Bog'lanish</a>
+
+          <!-- Mobil menyu tugmasi (Hamburger) -->
+          <button id="menu-toggle-btn" class="menu-toggle-btn" aria-label="Menyuni ochish">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
       </nav>
     </header>
@@ -57,10 +121,7 @@
         <div class="hero-content">
           <div class="status-badge">
             <span class="pulse-dot"></span>
-            <span
-              >10-maktab &bull; Mars Space o'quvchisi &bull; Hozirda faol
-              Frontend o'rganmoqda</span
-            >
+            <span>10-maktab &bull; Mars Space o'quvchisi &bull; Frontend Developer</span>
           </div>
 
           <h1 class="hero-title">
@@ -73,28 +134,21 @@
           </p>
 
           <p class="hero-description">
-            Men <span class="dynamic-age">13</span> yoshdaman (har yili
-            8-noyabrda yoshim oshadi). Mars Space IT maktabida zamonaviy
-            veb-texnologiyalar, toza kod va chiroyli interfeyslar yaratishni
-            o'rganmoqdaman.
+            Men <span class="dynamic-age">13</span> yoshdaman (har yili 8-noyabrda yoshim avtomatik yangilanadi). Mars Space IT maktabida zamonaviy veb-texnologiyalar, toza kod, skanerli POS tizimlari va qulay interfeyslar yaratishni o'rganmoqdaman.
           </p>
 
           <div class="hero-cta">
             <a href="#roadmap" class="btn btn-primary">
               <span>Mening Katta Maqsadim</span>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
-            <a href="#mars-space" class="btn btn-mars">
-              <span>🚀 Mars Space Ta'limi</span>
+            <a href="#projects" class="btn btn-glass">
+              <span>📂 Loyihalarimni ko'rish</span>
+            </a>
+            <a href="#quiz" class="btn btn-mars">
+              <span>🎮 Dasturchi Viktorinasi</span>
             </a>
           </div>
 
@@ -114,7 +168,7 @@
           </div>
         </div>
 
-        <!-- Hero o'ng taraf: Interaktiv Kod Kartasi -->
+        <!-- Hero o'ng taraf: Interaktiv Terminal va Kod Kartasi -->
         <div class="hero-visual">
           <div class="terminal-card">
             <div class="terminal-header">
@@ -123,9 +177,16 @@
                 <span class="dot dot-yellow"></span>
                 <span class="dot dot-green"></span>
               </div>
-              <div class="terminal-title">bobur_dasturchi.json</div>
+              <div class="terminal-title-tabs">
+                <span class="terminal-tab active">bobur_dasturchi.json</span>
+              </div>
+              <button id="cli-toggle-view" class="terminal-mode-switch" title="CLI rejimiga o'tish">
+                <span>⚡ Interaktiv CLI</span>
+              </button>
             </div>
-            <div class="terminal-body">
+
+            <!-- 1-ko'rinish: Kod oynasi -->
+            <div id="terminal-code-box" class="terminal-body">
               <pre><code><span class="code-keyword">const</span> <span class="code-var">developer</span> = {
   <span class="code-prop">ism</span>: <span class="code-str">"Bobur Mirboboyev"</span>,
   <span class="code-prop">taxallus</span>: <span class="code-str">"Bobur dasturchi"</span>,
@@ -137,32 +198,81 @@
   <span class="code-prop">kattaOrzu</span>: <span class="code-str">"Senior Engineer @ Google"</span>,
   <span class="code-prop">telegram</span>: <span class="code-str">"@Mirboboyev_08"</span>,
   <span class="code-prop">aloqa</span>: <span class="code-str">"+998 (99) 138-08-10"</span>,
-  <span class="code-prop">kuchliTomonlar</span>: [
-    <span class="code-str">"Toza kod"</span>,
-    <span class="code-str">"Tirishqoqlik"</span>,
-    <span class="code-str">"Obsidian orqali tizimli bilim"</span>
-  ],
+  <span class="code-prop">loyihalar</span>: [<span class="code-str">"Supermarket POS"</span>, <span class="code-str">"Savat"</span>, <span class="code-str">"Obsidian Brain"</span>],
   <span class="code-prop">harKungiOdat</span>: () => {
     <span class="code-keyword">return</span> <span class="code-str">"Har kuni yangi bilim va amaliyot! 🚀"</span>;
   }
 };</code></pre>
             </div>
+
+            <!-- 2-ko'rinish: To'liq Interaktiv CLI Terminal -->
+            <div id="terminal-interactive-box" class="terminal-cli-body" style="display: none;">
+              <div id="cli-terminal-output" class="cli-output">
+                <div class="cli-line cli-welcome">
+                  🚀 <strong>Bobur dasturchi CLI Konsoliga xush kelibsiz!</strong><br>
+                  Mavjud buyruqlarni ko'rish uchun <code>help</code> deb yozing va [Enter] bosing.
+                </div>
+              </div>
+              <form id="cli-terminal-form" class="cli-input-line">
+                <span class="cli-prompt">bobur@dev:~$</span>
+                <input
+                  type="text"
+                  id="cli-terminal-input"
+                  class="cli-input"
+                  placeholder="Buyruq yozing... (masalan: help, skills, matrix)"
+                  autocomplete="off"
+                  spellcheck="false"
+                />
+              </form>
+            </div>
+
             <div class="terminal-footer">
-              <span class="status-indicator"></span> Dasturchi tizimi:
-              <strong>FAOL</strong>
+              <span class="status-indicator"></span> Dasturchi tizimi: <strong>FAOL 2.0</strong>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 2. MEN HAQIMDA (ABOUT) QISMI -->
+      <!-- 2. ANIMATSIYALI STATISTIKA VA YUTUQLAR (STATS SECTION) -->
+      <section id="stats-section" class="stats-overview-section container">
+        <div class="stats-overview-grid">
+          <div class="stat-box glass-card">
+            <div class="stat-box-icon">⏱️</div>
+            <div class="stat-box-number count-up" data-target="500" data-suffix="+">0</div>
+            <div class="stat-box-title">Soat amaliy kodlash</div>
+            <p class="stat-box-desc">Darslar, amaliyotlar va mustaqil loyihalar ustida ishlangan vaqt.</p>
+          </div>
+
+          <div class="stat-box glass-card">
+            <div class="stat-box-icon">📚</div>
+            <div class="stat-box-number count-up" data-target="120" data-suffix="+">0</div>
+            <div class="stat-box-title">O'rganilgan mavzular</div>
+            <p class="stat-box-desc">Obsidian bilimlar bazasida tizimli konspekt qilingan texnik darslar.</p>
+          </div>
+
+          <div class="stat-box glass-card">
+            <div class="stat-box-icon">💻</div>
+            <div class="stat-box-number count-up" data-target="15" data-suffix="+">0</div>
+            <div class="stat-box-title">Amaliy veb loyihalar</div>
+            <p class="stat-box-desc">POS kassadan tortib, xakaton ishlari va shaxsiy portfoliogacha.</p>
+          </div>
+
+          <div class="stat-box glass-card featured-stat">
+            <div class="stat-box-icon">🪙</div>
+            <div class="stat-box-number count-up" data-target="1500" data-suffix="+">0</div>
+            <div class="stat-box-title">Mars IT Coinlar</div>
+            <p class="stat-box-desc">Mars Space ta'lim markazida dars faolligi va yutuqlar uchun jamg'arilgan ballar.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. MEN HAQIMDA (ABOUT) QISMI -->
       <section id="about" class="section container">
         <div class="section-header">
           <span class="section-badge">Tanishuv</span>
           <h2 class="section-title">Men haqimda</h2>
           <p class="section-subtitle">
-            Yoshim 13 da bo'lsa-da, katta maqsadlar va mustahkam intizom bilan
-            harakat qilaman.
+            Yoshim 13 da bo'lsa-da, katta maqsadlar, tizimli ta'lim va mustahkam intizom bilan harakat qilaman.
           </p>
         </div>
 
@@ -171,54 +281,49 @@
             <div class="card-icon">🎯</div>
             <h3>Mening falsafam va qarashlarim</h3>
             <p>
-              Dasturlash men uchun shunchaki kod yozish emas, balki muammolarni
-              hal qilish va insonlar hayotini yengillashtiruvchi qulay raqamli
-              mahsulotlar yaratish vositasidir.
+              Dasturlash men uchun shunchaki kod yozish emas, balki real muammolarni hal qilish va insonlar hayotini osonlashtiruvchi raqamli mahsulotlar yaratish san'atidir.
             </p>
             <p>
-              10-maktabda o'qishim bilan birga bo'sh vaqtimni
-              veb-texnologiyalarni o'rganishga bag'ishlayman. Har bir o'rgangan
-              mavzumni <strong>Obsidian</strong> bilimlar bazamda konspekt
-              qilib, tizimli ravishda mustahkamlab boraman.
+              10-maktabda o'qishim bilan bir vaqtda Mars IT School (Mars Space)da muntazam dasturlashni chuqur o'rganmoqdaman. Har bir o'rgangan bilimimni <strong>Obsidian</strong> bilimlar bazamda konspekt qilib, tizimli ravishda mustahkamlab boraman.
             </p>
+            <div class="about-quote-tag">
+              ⭐ "Eng zo'r dasturchi — har kuni o'rganishdan to'xtamaydigan dasturchidir."
+            </div>
           </div>
 
           <div class="glass-card feature-card">
             <div class="card-icon">⚡</div>
-            <h4>Tez o'rganish</h4>
+            <h4>Tez o'rganish va moslashuv</h4>
             <p>
-              Yangi texnologiyalar va kutubxonalarni amaliy mashqlar orqali oson
-              o'zlashtirish qobiliyati.
+              Yangi texnologiyalar, kutubxonalar va konseptlarni amaliy kodlash orqali tez o'zlashtirish qobiliyati.
             </p>
           </div>
 
           <div class="glass-card feature-card">
             <div class="card-icon">💎</div>
-            <h4>Premium Sifat</h4>
+            <h4>Premium Sifat va UX</h4>
             <p>
-              Faqat ishlaydigan kod emas, balki chiroyli dizayn, toza CSS va
-              qulay foydalanuvchi tajribasi (UX).
+              Faqat ishlaydigan kod emas, balki chiroyli vizual dizayn, silliq animatsiyalar va qulay interfeys.
             </p>
           </div>
 
           <div class="glass-card feature-card">
             <div class="card-icon">🧠</div>
-            <h4>Ikkinchi Miya (Obsidian)</h4>
+            <h4>Ikkinchi Miya (Obsidian PKM)</h4>
             <p>
-              Bilimlarni shunchaki eslab qolmayman, Obsidian orqali ularni
-              doimiy tizimlashtirib boraman.
+              Bilimlarni shunchaki eslab qolmayman, Obsidian orqali ularni doimiy o'zaro bog'langan holda tizimlashtirib boraman.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- 3. KO'NIKMALAR VA TEXNOLOGIYALAR -->
+      <!-- 4. KO'NIKMALAR VA TEXNOLOGIYALAR -->
       <section id="skills" class="section container">
         <div class="section-header">
           <span class="section-badge">Texnologiyalar</span>
           <h2 class="section-title">Ko'nikmalar va Vositalar</h2>
           <p class="section-subtitle">
-            O'zlashtirgan va hozirda o'rganayotgan texnologiyalarim majmuasi.
+            O'zlashtirgan va hozirda amaliyotda qo'llayotgan texnologiyalarim majmuasi.
           </p>
         </div>
 
@@ -227,12 +332,11 @@
           <div class="skill-card">
             <div class="skill-top">
               <div class="skill-badge-icon html-icon">HTML5</div>
-              <span class="skill-level">A'lo</span>
+              <span class="skill-level">A'lo &bull; 90%</span>
             </div>
             <h4>Semantik HTML5</h4>
             <p>
-              Veb-sahifalarning to'g'ri tuzilishi, qulaylik (accessibility) va
-              qidiruv tizimiga moslik (SEO).
+              Veb-sahifalarning to'g'ri tuzilishi, semantik teglar, forma validatsiyalari va qulaylik (accessibility).
             </p>
             <div class="progress-bar">
               <div class="progress" style="width: 90%"></div>
@@ -243,15 +347,14 @@
           <div class="skill-card featured-skill">
             <div class="skill-top">
               <div class="skill-badge-icon css-icon">CSS3</div>
-              <span class="skill-level">Premium</span>
+              <span class="skill-level">Premium &bull; 88%</span>
             </div>
             <h4>Zamonaviy & Premium CSS</h4>
             <p>
-              Flexbox, CSS Grid, Glassmorphism, animatsiyalar, Responsive dizayn
-              va chiroyli uslublar.
+              Flexbox, CSS Grid, Glassmorphism, CSS o'zgaruvchilari, neon effektlar va mukammal Responsive dizayn.
             </p>
             <div class="progress-bar">
-              <div class="progress" style="width: 85%"></div>
+              <div class="progress" style="width: 88%"></div>
             </div>
           </div>
 
@@ -259,12 +362,11 @@
           <div class="skill-card">
             <div class="skill-top">
               <div class="skill-badge-icon js-icon">JS</div>
-              <span class="skill-level">O'rganilmoqda</span>
+              <span class="skill-level">O'rganilmoqda &bull; 65%</span>
             </div>
             <h4>JavaScript (ES6+)</h4>
             <p>
-              DOM manipulyatsiyasi, hodisalar (events), funksiyalar va dinamik
-              interaktiv elementlar.
+              DOM manipulyatsiyasi, hodisalar, Web Audio API, Canvas grafikasi, LocalStorage va dinamik mantiq.
             </p>
             <div class="progress-bar">
               <div class="progress" style="width: 65%"></div>
@@ -275,21 +377,83 @@
           <div class="skill-card">
             <div class="skill-top">
               <div class="skill-badge-icon obs-icon">MD</div>
-              <span class="skill-level">Ekspert</span>
+              <span class="skill-level">Ekspert &bull; 92%</span>
             </div>
-            <h4>Obsidian & Markdown</h4>
+            <h4>Obsidian & Raqamli Miya</h4>
             <p>
-              Shaxsiy bilimlarni boshqarish, tahlil, konspektlar va bog'langan
-              havolalar tizimi.
+              Shaxsiy bilimlarni boshqarish, bog'langan qaydlar, Markdown tahlili va tizimli o'quv rejalari.
             </p>
             <div class="progress-bar">
               <div class="progress" style="width: 92%"></div>
             </div>
           </div>
+
+          <!-- Git & GitHub -->
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-badge-icon git-icon">GIT</div>
+              <span class="skill-level">Amaliyotda &bull; 60%</span>
+            </div>
+            <h4>Git & GitHub</h4>
+            <p>
+              Loyihalar versiyalarini boshqarish, commitlar, branchlar va kodlarni xavfsiz saqlash.
+            </p>
+            <div class="progress-bar">
+              <div class="progress" style="width: 60%"></div>
+            </div>
+          </div>
+
+          <!-- Algoritmlar (DSA) -->
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-badge-icon dsa-icon">DSA</div>
+              <span class="skill-level">Boshlang'ich &bull; 50%</span>
+            </div>
+            <h4>Algoritmlar & Mantiq</h4>
+            <p>
+              Masalalarni tahlil qilish, shartlar, sikllar, massivlar va kelajakdagi LeetCode tayyorgarligi.
+            </p>
+            <div class="progress-bar">
+              <div class="progress" style="width: 50%"></div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- 4. GOOGLE SARI ROADMAP (YO'L XARITASI) -->
+      <!-- 5. YANGI BO'LIM: OBSIDIAN INTERAKTIV BILIMLAR GRAFIGI -->
+      <section id="brain-graph" class="section container">
+        <div class="section-header">
+          <span class="section-badge">Obsidian Second Brain</span>
+          <h2 class="section-title">Interaktiv Bilimlar Grafigi</h2>
+          <p class="section-subtitle">
+            Mening Obsidian bilimlar bazamdagi o'zaro bog'langan tushunchalar va yo'nalishlar tarmog'i. Sichqonchani harakatlantiring va tugunlarni tanlang!
+          </p>
+        </div>
+
+        <div class="brain-graph-wrapper glass-card">
+          <div class="brain-graph-canvas-container">
+            <canvas id="brain-graph-canvas"></canvas>
+            <div class="graph-hint-tag">💡 Sichqoncha bilan tugunlar ustiga boring va bosing</div>
+          </div>
+          <div class="brain-graph-sidebar">
+            <div class="graph-sidebar-header">
+              <span class="pulse-dot"></span>
+              <h3>Tanlangan Bilim Tuguni</h3>
+            </div>
+            <div id="graph-node-info" class="graph-node-details">
+              <!-- JS orqali dinamik to'ldiriladi -->
+            </div>
+            <div class="graph-legend">
+              <span class="legend-item"><span class="legend-dot" style="background:#a855f7;"></span> Bosh yadro</span>
+              <span class="legend-item"><span class="legend-dot" style="background:#38bdf8;"></span> Frontend</span>
+              <span class="legend-item"><span class="legend-dot" style="background:#ef4444;"></span> Mars Space</span>
+              <span class="legend-item"><span class="legend-dot" style="background:#34d399;"></span> Google</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. GOOGLE SARI ROADMAP (YO'L XARITASI) -->
       <section id="roadmap" class="section container">
         <div class="section-header">
           <span class="section-badge">Kelajak rejasi</span>
@@ -297,7 +461,7 @@
             Senior Dasturchi & Google Sari Yo'l Xaritasi
           </h2>
           <p class="section-subtitle">
-            Obsidian omborimda belgilangan aniq va tizimli rejam.
+            Obsidian omborimda belgilangan aniq, qat'iy va bosqichma-bosqich rejam.
           </p>
         </div>
 
@@ -306,13 +470,10 @@
           <div class="timeline-item active">
             <div class="timeline-marker">1</div>
             <div class="timeline-content glass-card">
-              <div class="timeline-status-tag current">
-                Hozirgi bosqich: O'rganilmoqda
-              </div>
+              <div class="timeline-status-tag current">Hozirgi bosqich: O'rganilmoqda</div>
               <h3>1-Bosqich: Frontend Mastery (Veb Asoslari)</h3>
               <p>
-                HTML5, zamonaviy CSS3 (Grid, Flexbox), JavaScript mantiqiy
-                asoslari, Git & GitHub va mustaqil loyihalar yaratish.
+                HTML5, zamonaviy CSS3 (Grid, Flexbox), JavaScript ES6+ mantiqiy asoslari, Git & GitHub va mustaqil amaliy loyihalar yaratish.
               </p>
               <div class="tags">
                 <span class="tag">HTML5</span>
@@ -330,9 +491,7 @@
               <div class="timeline-status-tag next">Keyingi qadam</div>
               <h3>2-Bosqich: Backend & Full-Stack</h3>
               <p>
-                Server qismini boshqarish, Node.js yoki Python asoslari,
-                SQL/NoSQL ma'lumotlar bazalari, RESTful API va to'liq tizimlar
-                yaratish.
+                Server qismini boshqarish, Node.js yoki Python asoslari, SQL/NoSQL ma'lumotlar bazalari, RESTful API va to'liq tizimlar yaratish.
               </p>
               <div class="tags">
                 <span class="tag">Node.js / Python</span>
@@ -350,9 +509,7 @@
               <div class="timeline-status-tag future">Algoritmlar</div>
               <h3>3-Bosqich: Algoritmlar & Data Structures (DSA)</h3>
               <p>
-                Google va yetakchi kompaniyalar intervyusiga tayyorgarlik:
-                LeetCode masalalari, ma'lumotlar tuzilmalari va tizim
-                arxitekturasi (System Design).
+                Google va yetakchi jahon IT kompaniyalari intervyusiga tayyorgarlik: LeetCode masalalari, ma'lumotlar tuzilmalari va tizim arxitekturasi (System Design).
               </p>
               <div class="tags">
                 <span class="tag">Data Structures</span>
@@ -370,9 +527,7 @@
               <div class="timeline-status-tag target">🌟 Asosiy Maqsad</div>
               <h3>4-Bosqich: Senior Dasturchi @ Google</h3>
               <p>
-                Xalqaro darajadagi muhandis bo'lib yetishish, Google jamoasida
-                global miqyosdagi innovatsion texnologiyalarni yaratishda
-                ishtirok etish.
+                Xalqaro darajadagi yetuk muhandis bo'lib yetishish, Google jamoasida global miqyosdagi innovatsion texnologiyalarni yaratishda ishtirok etish.
               </p>
               <div class="tags">
                 <span class="tag tag-google">Google</span>
@@ -384,83 +539,210 @@
         </div>
       </section>
 
-      <!-- 5. LOYIHALAR (PROJECTS) -->
+      <!-- 7. LOYIHALAR BO'LIMI (FILTERABLE & MODAL) -->
       <section id="projects" class="section container">
         <div class="section-header">
           <span class="section-badge">Amaliyot</span>
           <h2 class="section-title">Tanlangan Loyihalar</h2>
           <p class="section-subtitle">
-            O'rganish jarayonida tayyorlangan amaliy ishlarim.
+            O'rganish jarayonida va Mars Space darslarida yaratilgan amaliy ishlarim.
           </p>
         </div>
 
+        <!-- Loyihalar Filtr Tugmalari -->
+        <div class="project-filter-tabs">
+          <button class="filter-btn active" data-filter="all">Barchasi (6)</button>
+          <button class="filter-btn" data-filter="frontend">Frontend & Veb</button>
+          <button class="filter-btn" data-filter="mars">Mars Space & Xakaton</button>
+          <button class="filter-btn" data-filter="pkm">Obsidian & Tizimlar</button>
+        </div>
+
         <div class="projects-grid">
-          <!-- Loyiha 1 -->
-          <div class="project-card glass-card">
-            <div class="project-preview preview-1">
+          <!-- Loyiha 1: Supermarket POS -->
+          <div class="project-card glass-card" data-category="frontend">
+            <div class="project-preview preview-pos">
               <div class="preview-overlay">
-                <span class="badge-tech">HTML5 &bull; CSS3</span>
+                <span class="badge-tech">Skaner &bull; Kassa POS</span>
               </div>
             </div>
             <div class="project-body">
-              <h3>Bobur dasturchi Shaxsiy Portfoliosi</h3>
+              <h3>Supermarket POS Kassa Tizimi</h3>
               <p>
-                Premium dark-mode, Glassmorphism effekti va toza semantik kod
-                bilan tayyorlangan shaxsiy tashrif qog'ozi.
+                Shtrix-kod skaneri, savat boshqaruvi, to'lovlar va chek chiqarish moduli bilan jihozlangan chakana savdo kassa platformasi.
               </p>
               <div class="project-tags">
-                <span>HTML5</span>
-                <span>Premium CSS</span>
-                <span>Responsive</span>
+                <span>JavaScript</span>
+                <span>Barcode Scanner</span>
+                <span>POS UI</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-outline-sm view-project-btn" data-project-id="pos">
+                  <span>Batafsil ko'rish</span>
+                </button>
               </div>
             </div>
           </div>
 
-          <!-- Loyiha 2 -->
-          <div class="project-card glass-card">
+          <!-- Loyiha 2: Portfolio 2.0 -->
+          <div class="project-card glass-card featured-project" data-category="frontend">
+            <div class="project-preview preview-1">
+              <div class="preview-overlay">
+                <span class="badge-tech">HTML5 &bull; CSS3 &bull; JS</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3>Bobur dasturchi Portfoliose 2.0</h3>
+              <p>
+                Ultra-zamonaviy Dark Glassmorphism dizayni, Web Audio mexanik klaviatura effekti, interaktiv CLI terminal va rang mavzulari.
+              </p>
+              <div class="project-tags">
+                <span>Interaktiv CLI</span>
+                <span>Web Audio</span>
+                <span>Canvas Matrix</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-primary-sm view-project-btn" data-project-id="portfolio">
+                  <span>Batafsil ko'rish</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Loyiha 3: Savat Loyihasi -->
+          <div class="project-card glass-card" data-category="frontend">
+            <div class="project-preview preview-savat">
+              <div class="preview-overlay">
+                <span class="badge-tech">E-Commerce &bull; Cart</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3>E-Commerce Savat & Buyurtma</h3>
+              <p>
+                Mahsulotlar katalogi, bir bosishda savatga qo'shish, jami hisob-kitob va real vaqtda buyurtma shakllantirish tizimi.
+              </p>
+              <div class="project-tags">
+                <span>DOM Scripting</span>
+                <span>Hisoblagich</span>
+                <span>E-Shop</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-outline-sm view-project-btn" data-project-id="savat">
+                  <span>Batafsil ko'rish</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Loyiha 4: Mars Space Xakaton -->
+          <div class="project-card glass-card" data-category="mars">
+            <div class="project-preview preview-mars">
+              <div class="preview-overlay">
+                <span class="badge-tech">Mars Space &bull; Hackathon</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3>Mars Space Xakaton Maxsus Loyihasi</h3>
+              <p>
+                Mars IT maktabi doirasidagi xakaton musobaqasida tezkor jamoaviy intilish bilan tayyorlangan innovatsion veb yechim.
+              </p>
+              <div class="project-tags">
+                <span>Mars IT</span>
+                <span>Hackathon</span>
+                <span>Innovatsiya</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-outline-sm view-project-btn" data-project-id="hackathon">
+                  <span>Batafsil ko'rish</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Loyiha 5: Obsidian Digital Brain -->
+          <div class="project-card glass-card" data-category="pkm">
             <div class="project-preview preview-2">
               <div class="preview-overlay">
                 <span class="badge-tech">Obsidian &bull; PKM</span>
               </div>
             </div>
             <div class="project-body">
-              <h3>Raqamli Bilimlar Ombori (Second Brain)</h3>
+              <h3>Obsidian Digital Brain (Second Brain)</h3>
               <p>
-                Obsidian dasturida o'zaro bog'langan qaydlar, konspektlar va
-                o'quv rejalari bilan tuzilgan shaxsiy tizim.
+                120 dan ortiq dars konspektlari, o'zaro bog'langan qaydlar va dasturchi rivojlanish rejasidan iborat raqamli bilimlar tizimi.
               </p>
               <div class="project-tags">
                 <span>Obsidian</span>
-                <span>Markdown</span>
-                <span>PKM</span>
+                <span>Graph View</span>
+                <span>Konspektlar</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-outline-sm view-project-btn" data-project-id="obsidian">
+                  <span>Batafsil ko'rish</span>
+                </button>
               </div>
             </div>
           </div>
 
-          <!-- Loyiha 3 -->
-          <div class="project-card glass-card">
+          <!-- Loyiha 6: Sog'lom Keksalik -->
+          <div class="project-card glass-card" data-category="frontend">
             <div class="project-preview preview-3">
               <div class="preview-overlay">
-                <span class="badge-tech">CSS Flex & Grid</span>
+                <span class="badge-tech">Social Web &bull; UI</span>
               </div>
             </div>
             <div class="project-body">
-              <h3>Zamonaviy Amaliy Veb Sahifalar</h3>
+              <h3>Sog'lom Keksalik Ijtimoiy Loyihasi</h3>
               <p>
-                Mars IT maktabi va mustaqil darslar davomida yaratilgan turli
-                adaptiv veb-maketlar va landing pagelar.
+                Katta yoshdagilar uchun qulay shriftlar va yuqori kontrastli qulay interfeysga ega salomatlik veb-platformasi.
               </p>
               <div class="project-tags">
-                <span>Flexbox</span>
-                <span>CSS Grid</span>
-                <span>UI/UX</span>
+                <span>Accessibility</span>
+                <span>Yuqori Kontrast</span>
+                <span>HTML/CSS</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-outline-sm view-project-btn" data-project-id="soglom">
+                  <span>Batafsil ko'rish</span>
+                </button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 6. MARS IT SCHOOL & MARS SPACE (PREMIUM REKLAMA VA TAVSIYA) -->
+      <!-- 8. YANGI BO'LIM: DASTURCHILAR VIKTORINASI (DEV QUIZ) -->
+      <section id="quiz" class="section container">
+        <div class="section-header">
+          <span class="section-badge">Interaktiv O'yin</span>
+          <h2 class="section-title">Dasturchi Viktorinasi</h2>
+          <p class="section-subtitle">
+            Frontend bilimlaringizni sinab ko'ring va Bobur dasturchi bilan tenglashing! 5 ta qiziqarli savol.
+          </p>
+        </div>
+
+        <div class="quiz-card glass-card">
+          <!-- Savol qismi -->
+          <div id="quiz-box" class="quiz-box">
+            <div class="quiz-top-bar">
+              <span id="quiz-progress-text" class="quiz-progress-badge">Savol 1 / 5</span>
+              <span class="quiz-timer-tag">🎯 Bobur dasturchi Quiz</span>
+            </div>
+            <h3 id="quiz-question" class="quiz-question-title">Yuklanmoqda...</h3>
+            <div id="quiz-options" class="quiz-options-grid"></div>
+            <div id="quiz-feedback" class="quiz-feedback"></div>
+          </div>
+
+          <!-- Natija qismi -->
+          <div id="quiz-result-box" class="quiz-result-box" style="display: none;">
+            <div id="quiz-final-score"></div>
+            <button id="quiz-restart-btn" class="btn btn-primary">
+              <span>Qayta boshlash 🔄</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. MARS IT SCHOOL & MARS SPACE -->
       <section id="mars-space" class="section container">
         <div class="mars-section-card glass-card">
           <div class="mars-planet-glow"></div>
@@ -472,18 +754,11 @@
 
             <h2 class="mars-title">
               Kelajak Shu Yerdan Boshlanadi:
-              <span class="mars-gradient-text"
-                >Mars IT School & Mars Space</span
-              >
+              <span class="mars-gradient-text">Mars IT School & Mars Space</span>
             </h2>
 
             <p class="mars-desc">
-              Men o'z dasturlash sarguzashtimni va Frontend asoslarini aynan
-              <strong>Mars IT School</strong>da o'rganishdan boshladim.
-              <strong>Mars Space</strong> — bu shunchaki o'quv markazi emas,
-              balki yoshlarga haqiqiy zamonaviy dasturlash, kosmik darajadagi
-              amaliyot va mustaqil fikrlashni o'rgatuvchi eng ilg'or ta'lim
-              maskani!
+              Men o'z dasturlash sarguzashtimni va Frontend asoslarini aynan <strong>Mars IT School</strong>da o'rganishdan boshladim. <strong>Mars Space</strong> — bu shunchaki o'quv markazi emas, balki yoshlarga haqiqiy zamonaviy dasturlash, kosmik darajadagi amaliyot va mustaqil fikrlashni o'rgatuvchi eng ilg'or ta'lim maskani!
             </p>
 
             <div class="mars-features-grid">
@@ -491,8 +766,7 @@
                 <div class="mars-feat-icon">🚀</div>
                 <h4>Amaliy Ta'lim & Loyihalar</h4>
                 <p>
-                  Quruq nazariyasiz, har bir darsda mustaqil veb-saytlar va real
-                  amaliy loyihalar yaratish.
+                  Quruq nazariyasiz, har bir darsda mustaqil veb-saytlar va real amaliy loyihalar yaratish.
                 </p>
               </div>
 
@@ -500,8 +774,7 @@
                 <div class="mars-feat-icon">🪙</div>
                 <h4>Mars Coins & Gamifikatsiya</h4>
                 <p>
-                  O'qish, faollik va yutuqlar uchun maxsus Mars Coinlar yig'ib,
-                  qiziqarli sovg'alar va bilim yutib olish.
+                  O'qish, faollik va yutuqlar uchun maxsus Mars Coinlar yig'ib, qiziqarli sovg'alar va bilim yutib olish.
                 </p>
               </div>
 
@@ -509,8 +782,7 @@
                 <div class="mars-feat-icon">🌐</div>
                 <h4>Mars Space Platformasi</h4>
                 <p>
-                  Darslar, uyga vazifalar, reyting va o'sish dinamikasini qulay
-                  yagona ekotizim orqali kuzatish.
+                  Darslar, uyga vazifalar, reyting va o'sish dinamikasini qulay yagona ekotizim orqali kuzatish.
                 </p>
               </div>
             </div>
@@ -523,17 +795,8 @@
                 class="btn btn-mars-fire"
               >
                 <span>Mars IT School Saytiga O'tish</span>
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
-                  ></path>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                   <polyline points="15 3 21 3 21 9"></polyline>
                   <line x1="10" y1="14" x2="21" y2="3"></line>
                 </svg>
@@ -546,14 +809,61 @@
         </div>
       </section>
 
-      <!-- 7. BOG'LANISH (CONTACT) -->
+      <!-- 10. YANGI BO'LIM: MEHMONLAR KITOBI (GUESTBOOK) VA TELEGRAM XABAR -->
+      <section id="guestbook" class="section container">
+        <div class="section-header">
+          <span class="section-badge">Ochiq Doska</span>
+          <h2 class="section-title">Mehmonlar Kitobi & Fikrlar</h2>
+          <p class="section-subtitle">
+            Bobur dasturchi portfolioga tashrifingiz haqida fikringizni qoldiring yoki to'g'ridan-to'g'ri Telegramda yozing!
+          </p>
+        </div>
+
+        <div class="guestbook-container-grid">
+          <!-- Xabar yozish formasi -->
+          <div class="glass-card guestbook-form-card">
+            <h3>✍️ Fikr yoki Tilak Qoldirish</h3>
+            <form id="guestbook-form" class="guest-form">
+              <div class="form-group">
+                <label for="guest-name">Ismingiz:</label>
+                <input type="text" id="guest-name" placeholder="Masalan: Sardor" required />
+              </div>
+              <div class="form-group">
+                <label for="guest-role">Kasbingiz / Kimligingiz:</label>
+                <input type="text" id="guest-role" placeholder="Masalan: Dasturchi, Talaba, Do'st" />
+              </div>
+              <div class="form-group">
+                <label for="guest-message">Xabaringiz / Tilaklaringiz:</label>
+                <textarea id="guest-message" rows="4" placeholder="Bobur dasturchiga o'z tilaklaringizni yozing..." required></textarea>
+              </div>
+              <div class="form-buttons-row">
+                <button type="submit" class="btn btn-primary">
+                  <span>Sayt doskasiga saqlash ✨</span>
+                </button>
+                <button type="button" id="send-telegram-direct" class="btn btn-tg">
+                  <span>Telegramga yuborish ✈️</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Qoldirilgan tilaklar ro'yxati -->
+          <div class="guestbook-feed">
+            <h3 class="feed-title">💬 So'nggi Qoldirilgan Tilaklar:</h3>
+            <div id="guestbook-list" class="guestbook-feed-list">
+              <!-- JS orqali to'ldiriladi -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11. BOG'LANISH (CONTACT) -->
       <section id="contact" class="section container">
         <div class="section-header">
           <span class="section-badge">Muloqot</span>
           <h2 class="section-title">Keling, bog'lanamiz!</h2>
           <p class="section-subtitle">
-            Savollaringiz bormi yoki qiziqarli loyihalar ustida fikr
-            almashmoqchimisiz? Men bilan qulay usulda bog'lanishingiz mumkin.
+            Savollaringiz bormi yoki qiziqarli loyihalar ustida fikr almashmoqchimisiz? Men bilan qulay usulda bog'lanishingiz mumkin.
           </p>
         </div>
 
@@ -563,16 +873,7 @@
             <div class="card-glow-aura aura-tg"></div>
             <div class="contact-card-header">
               <div class="contact-channel-icon icon-tg">
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="22" y1="2" x2="11" y2="13"></line>
                   <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                 </svg>
@@ -585,50 +886,22 @@
             </div>
 
             <p class="contact-channel-desc">
-              Eng tezkor aloqa yo'li. Telegram orqali istalgan vaqtda fikr,
-              savol yoki takliflaringizni yozishingiz mumkin.
+              Eng tezkor aloqa yo'li. Telegram orqali istalgan vaqtda fikr, savol yoki takliflaringizni yozishingiz mumkin.
             </p>
 
             <div class="contact-btn-group">
-              <a
-                href="https://t.me/Mirboboyev_08"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-tg"
-              >
+              <a href="https://t.me/Mirboboyev_08" target="_blank" rel="noopener noreferrer" class="btn btn-tg">
                 <span>Telegramda yozish</span>
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
-                  ></path>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                   <polyline points="15 3 21 3 21 9"></polyline>
                   <line x1="10" y1="14" x2="21" y2="3"></line>
                 </svg>
               </a>
-              <button
-                class="btn btn-glass copy-btn"
-                data-copy="https://t.me/Mirboboyev_08"
-                title="Havolani nusxalash"
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+              <button class="btn btn-glass copy-btn" data-copy="https://t.me/Mirboboyev_08" title="Havolani nusxalash">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path
-                    d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-                  ></path>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                 </svg>
                 <span>Nusxa olish</span>
               </button>
@@ -640,19 +913,8 @@
             <div class="card-glow-aura aura-phone"></div>
             <div class="contact-card-header">
               <div class="contact-channel-icon icon-phone">
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path
-                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-                  ></path>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                 </svg>
               </div>
               <div class="contact-channel-meta">
@@ -663,41 +925,20 @@
             </div>
 
             <p class="contact-channel-desc">
-              To'g'ridan-to'g'ri telefon muloqoti yoki SMS xabarlar uchun
-              shaxsiy aloqa raqami.
+              To'g'ridan-to'g'ri telefon muloqoti yoki SMS xabarlar uchun shaxsiy aloqa raqami.
             </p>
 
             <div class="contact-btn-group">
               <a href="tel:+998991380810" class="btn btn-phone">
                 <span>Qo'ng'iroq qilish</span>
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </a>
-              <button
-                class="btn btn-glass copy-btn"
-                data-copy="+998991380810"
-                title="Raqamni nusxalash"
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+              <button class="btn btn-glass copy-btn" data-copy="+998991380810" title="Raqamni nusxalash">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path
-                    d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-                  ></path>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                 </svg>
                 <span>Nusxa olish</span>
               </button>
@@ -710,9 +951,7 @@
           <div class="banner-quote-wrapper">
             <div class="banner-quote-icon">“</div>
             <blockquote>
-              "Har qanday buyuk natija kichik qadamlar va qat'iyat bilan
-              boshlanadi. <span class="dynamic-age">13</span> yosh — katta
-              marralar uchun ayni boshlanish davri!"
+              "Har qanday buyuk natija kichik qadamlar va qat'iyat bilan boshlanadi. <span class="dynamic-age">13</span> yosh — katta marralar va Google sari ayni boshlanish davri!"
             </blockquote>
           </div>
           <div class="banner-author">
@@ -725,21 +964,55 @@
         </div>
       </section>
 
-      <!-- Toast Xabarnomasi (Nusxa olinganda chiqadi) -->
+      <!-- 12. LOYIHA TAFSILOTLARI MODAL OYNASI -->
+      <div id="project-modal" class="project-modal-wrapper">
+        <div id="modal-backdrop" class="project-modal-backdrop"></div>
+        <div class="project-modal-content glass-card">
+          <button id="modal-close-btn" class="modal-close-btn" aria-label="Yopish">&times;</button>
+          <div class="modal-header">
+            <span id="modal-category" class="modal-category-badge">Loyiha</span>
+            <h2 id="modal-title">Loyiha nomi</h2>
+          </div>
+          <p id="modal-description" class="modal-description-text"></p>
+          <div class="modal-section">
+            <h4>🌟 Asosiy imkoniyatlar:</h4>
+            <ul id="modal-highlights" class="modal-highlights-list"></ul>
+          </div>
+          <div class="modal-section">
+            <h4>🛠️ Ishlatilgan texnologiyalar:</h4>
+            <div id="modal-tags" class="tags"></div>
+          </div>
+          <div class="modal-footer-actions">
+            <a href="https://t.me/Mirboboyev_08" target="_blank" class="btn btn-primary">
+              <span>Loyiha bo'yicha savol berish</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toast Bildirishnomasi -->
       <div id="toast" class="toast">
         <span class="toast-icon">✨</span>
         <span id="toast-text">Ma'lumot nusxalandi!</span>
       </div>
+
+      <!-- Suzuvchi Yuqoriga Qaytish Tugmasi (Back-to-top) -->
+      <button id="back-to-top-btn" class="back-to-top-btn" title="Yuqoriga qaytish">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </button>
     </main>
 
     <!-- FOOTER -->
     <footer class="footer">
       <div class="container footer-content">
         <p>
-          &copy; 2026 <strong>Bobur dasturchi</strong>. Barcha huquqlar
-          himoyalangan.
+          &copy; 2026 <strong>Bobur dasturchi</strong> (Bobur Mirboboyev). Barcha huquqlar himoyalangan.
         </p>
-        <p class="footer-note">HTML5 & Premium CSS bilan maxsus yaratildi ✨</p>
+        <p class="footer-note">
+          10-maktab &bull; Mars IT School (Mars Space) &bull; Portfolio 2.0 ✨
+        </p>
       </div>
     </footer>
 
