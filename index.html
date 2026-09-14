@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bobur dasturchi | Shaxsiy Portfolio</title>
+    <meta
+      name="description"
+      content="Bobur Mirboboyev — 13 yoshli iqtidorli Frontend dasturchi. Maqsad: Senior darajasiga erishish va Google kompaniyasiga ishga kirish."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Orqa fon nurlari va effektlar -->
+    <div class="glow-sphere glow-1"></div>
+    <div class="glow-sphere glow-2"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- Yuqori navigatsiya paneli (Glassmorphism Navbar) -->
+    <header class="navbar-wrapper">
+      <nav class="navbar container">
+        <a href="#home" class="brand">
+          <span class="brand-badge">&lt;/&gt;</span>
+          <span class="brand-name"
+            >Bobur<span class="gradient-text">.dev</span></span
+          >
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-link active">Bosh sahifa</a></li>
+          <li><a href="#about" class="nav-link">Men haqimda</a></li>
+          <li><a href="#skills" class="nav-link">Ko'nikmalar</a></li>
+          <li><a href="#roadmap" class="nav-link">Google Yo'l xaritasi</a></li>
+          <li><a href="#projects" class="nav-link">Loyihalar</a></li>
+          <li>
+            <a href="#mars-space" class="nav-link nav-mars"
+              ><span class="mars-dot"></span>Mars Space</a
+            >
+          </li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="#contact" class="btn btn-outline-sm">Bog'lanish</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- 1. HERO QISMI -->
+      <section id="home" class="hero-section container">
+        <div class="hero-content">
+          <div class="status-badge">
+            <span class="pulse-dot"></span>
+            <span
+              >10-maktab &bull; Mars Space o'quvchisi &bull; Hozirda faol
+              Frontend o'rganmoqda</span
+            >
+          </div>
+
+          <h1 class="hero-title">
+            Salom, men <span class="gradient-text">Bobur Mirboboyev</span>
+          </h1>
+
+          <p class="hero-role">
+            Kelajakdagi <span class="highlight">Senior Dasturchi</span> va
+            <span class="highlight-google">Google</span> muhandisi
+          </p>
+
+          <p class="hero-description">
+            Men <span class="dynamic-age">13</span> yoshdaman (har yili
+            8-noyabrda yoshim oshadi). Mars Space IT maktabida zamonaviy
+            veb-texnologiyalar, toza kod va chiroyli interfeyslar yaratishni
+            o'rganmoqdaman.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#roadmap" class="btn btn-primary">
+              <span>Mening Katta Maqsadim</span>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <a href="#mars-space" class="btn btn-mars">
+              <span>🚀 Mars Space Ta'limi</span>
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <span class="stat-number dynamic-age">13</span>
+              <span class="stat-label">Yoshdagi katta orzular</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">Mars</span>
+              <span class="stat-label">IT School o'quvchisi</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">Google</span>
+              <span class="stat-label">Bosh maqsad & Manzil</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero o'ng taraf: Interaktiv Kod Kartasi -->
+        <div class="hero-visual">
+          <div class="terminal-card">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <div class="terminal-title">bobur_dasturchi.json</div>
+            </div>
+            <div class="terminal-body">
+              <pre><code><span class="code-keyword">const</span> <span class="code-var">developer</span> = {
+  <span class="code-prop">ism</span>: <span class="code-str">"Bobur Mirboboyev"</span>,
+  <span class="code-prop">taxallus</span>: <span class="code-str">"Bobur dasturchi"</span>,
+  <span class="code-prop">yosh</span>: <span class="code-num dynamic-age">13</span>,
+  <span class="code-prop">tugilganKun</span>: <span class="code-str">"8-noyabr (2012)"</span>,
+  <span class="code-prop">maktab</span>: <span class="code-str">"10-maktab & Mars Space"</span>,
+  <span class="code-prop">yonalish</span>: <span class="code-str">"Frontend Developer"</span>,
+  <span class="code-prop">keyingiBosqich</span>: <span class="code-str">"Backend & Fullstack"</span>,
+  <span class="code-prop">kattaOrzu</span>: <span class="code-str">"Senior Engineer @ Google"</span>,
+  <span class="code-prop">telegram</span>: <span class="code-str">"@Mirboboyev_08"</span>,
+  <span class="code-prop">aloqa</span>: <span class="code-str">"+998 (99) 138-08-10"</span>,
+  <span class="code-prop">kuchliTomonlar</span>: [
+    <span class="code-str">"Toza kod"</span>,
+    <span class="code-str">"Tirishqoqlik"</span>,
+    <span class="code-str">"Obsidian orqali tizimli bilim"</span>
+  ],
+  <span class="code-prop">harKungiOdat</span>: () => {
+    <span class="code-keyword">return</span> <span class="code-str">"Har kuni yangi bilim va amaliyot! 🚀"</span>;
+  }
+};</code></pre>
+            </div>
+            <div class="terminal-footer">
+              <span class="status-indicator"></span> Dasturchi tizimi:
+              <strong>FAOL</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. MEN HAQIMDA (ABOUT) QISMI -->
+      <section id="about" class="section container">
+        <div class="section-header">
+          <span class="section-badge">Tanishuv</span>
+          <h2 class="section-title">Men haqimda</h2>
+          <p class="section-subtitle">
+            Yoshim 13 da bo'lsa-da, katta maqsadlar va mustahkam intizom bilan
+            harakat qilaman.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="glass-card about-card-main">
+            <div class="card-icon">🎯</div>
+            <h3>Mening falsafam va qarashlarim</h3>
+            <p>
+              Dasturlash men uchun shunchaki kod yozish emas, balki muammolarni
+              hal qilish va insonlar hayotini yengillashtiruvchi qulay raqamli
+              mahsulotlar yaratish vositasidir.
+            </p>
+            <p>
+              10-maktabda o'qishim bilan birga bo'sh vaqtimni
+              veb-texnologiyalarni o'rganishga bag'ishlayman. Har bir o'rgangan
+              mavzumni <strong>Obsidian</strong> bilimlar bazamda konspekt
+              qilib, tizimli ravishda mustahkamlab boraman.
+            </p>
+          </div>
+
+          <div class="glass-card feature-card">
+            <div class="card-icon">⚡</div>
+            <h4>Tez o'rganish</h4>
+            <p>
+              Yangi texnologiyalar va kutubxonalarni amaliy mashqlar orqali oson
+              o'zlashtirish qobiliyati.
+            </p>
+          </div>
+
+          <div class="glass-card feature-card">
+            <div class="card-icon">💎</div>
+            <h4>Premium Sifat</h4>
+            <p>
+              Faqat ishlaydigan kod emas, balki chiroyli dizayn, toza CSS va
+              qulay foydalanuvchi tajribasi (UX).
+            </p>
+          </div>
+
+          <div class="glass-card feature-card">
+            <div class="card-icon">🧠</div>
+            <h4>Ikkinchi Miya (Obsidian)</h4>
+            <p>
+              Bilimlarni shunchaki eslab qolmayman, Obsidian orqali ularni
+              doimiy tizimlashtirib boraman.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. KO'NIKMALAR VA TEXNOLOGIYALAR -->
+      <section id="skills" class="section container">
+        <div class="section-header">
+          <span class="section-badge">Texnologiyalar</span>
+          <h2 class="section-title">Ko'nikmalar va Vositalar</h2>
+          <p class="section-subtitle">
+            O'zlashtirgan va hozirda o'rganayotgan texnologiyalarim majmuasi.
+          </p>
+        </div>
+
+        <div class="skills-grid">
+          <!-- HTML5 -->
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-badge-icon html-icon">HTML5</div>
+              <span class="skill-level">A'lo</span>
+            </div>
+            <h4>Semantik HTML5</h4>
+            <p>
+              Veb-sahifalarning to'g'ri tuzilishi, qulaylik (accessibility) va
+              qidiruv tizimiga moslik (SEO).
+            </p>
+            <div class="progress-bar">
+              <div class="progress" style="width: 90%"></div>
+            </div>
+          </div>
+
+          <!-- CSS3 -->
+          <div class="skill-card featured-skill">
+            <div class="skill-top">
+              <div class="skill-badge-icon css-icon">CSS3</div>
+              <span class="skill-level">Premium</span>
+            </div>
+            <h4>Zamonaviy & Premium CSS</h4>
+            <p>
+              Flexbox, CSS Grid, Glassmorphism, animatsiyalar, Responsive dizayn
+              va chiroyli uslublar.
+            </p>
+            <div class="progress-bar">
+              <div class="progress" style="width: 85%"></div>
+            </div>
+          </div>
+
+          <!-- JavaScript -->
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-badge-icon js-icon">JS</div>
+              <span class="skill-level">O'rganilmoqda</span>
+            </div>
+            <h4>JavaScript (ES6+)</h4>
+            <p>
+              DOM manipulyatsiyasi, hodisalar (events), funksiyalar va dinamik
+              interaktiv elementlar.
+            </p>
+            <div class="progress-bar">
+              <div class="progress" style="width: 65%"></div>
+            </div>
+          </div>
+
+          <!-- Obsidian PKM -->
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-badge-icon obs-icon">MD</div>
+              <span class="skill-level">Ekspert</span>
+            </div>
+            <h4>Obsidian & Markdown</h4>
+            <p>
+              Shaxsiy bilimlarni boshqarish, tahlil, konspektlar va bog'langan
+              havolalar tizimi.
+            </p>
+            <div class="progress-bar">
+              <div class="progress" style="width: 92%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. GOOGLE SARI ROADMAP (YO'L XARITASI) -->
+      <section id="roadmap" class="section container">
+        <div class="section-header">
+          <span class="section-badge">Kelajak rejasi</span>
+          <h2 class="section-title">
+            Senior Dasturchi & Google Sari Yo'l Xaritasi
+          </h2>
+          <p class="section-subtitle">
+            Obsidian omborimda belgilangan aniq va tizimli rejam.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <!-- 1-bosqich -->
+          <div class="timeline-item active">
+            <div class="timeline-marker">1</div>
+            <div class="timeline-content glass-card">
+              <div class="timeline-status-tag current">
+                Hozirgi bosqich: O'rganilmoqda
+              </div>
+              <h3>1-Bosqich: Frontend Mastery (Veb Asoslari)</h3>
+              <p>
+                HTML5, zamonaviy CSS3 (Grid, Flexbox), JavaScript mantiqiy
+                asoslari, Git & GitHub va mustaqil loyihalar yaratish.
+              </p>
+              <div class="tags">
+                <span class="tag">HTML5</span>
+                <span class="tag">CSS3 / SASS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Git / GitHub</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2-bosqich -->
+          <div class="timeline-item">
+            <div class="timeline-marker">2</div>
+            <div class="timeline-content glass-card">
+              <div class="timeline-status-tag next">Keyingi qadam</div>
+              <h3>2-Bosqich: Backend & Full-Stack</h3>
+              <p>
+                Server qismini boshqarish, Node.js yoki Python asoslari,
+                SQL/NoSQL ma'lumotlar bazalari, RESTful API va to'liq tizimlar
+                yaratish.
+              </p>
+              <div class="tags">
+                <span class="tag">Node.js / Python</span>
+                <span class="tag">PostgreSQL / MongoDB</span>
+                <span class="tag">REST API</span>
+                <span class="tag">Fullstack</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3-bosqich -->
+          <div class="timeline-item">
+            <div class="timeline-marker">3</div>
+            <div class="timeline-content glass-card">
+              <div class="timeline-status-tag future">Algoritmlar</div>
+              <h3>3-Bosqich: Algoritmlar & Data Structures (DSA)</h3>
+              <p>
+                Google va yetakchi kompaniyalar intervyusiga tayyorgarlik:
+                LeetCode masalalari, ma'lumotlar tuzilmalari va tizim
+                arxitekturasi (System Design).
+              </p>
+              <div class="tags">
+                <span class="tag">Data Structures</span>
+                <span class="tag">Algorithms</span>
+                <span class="tag">LeetCode</span>
+                <span class="tag">System Design</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4-bosqich -->
+          <div class="timeline-item">
+            <div class="timeline-marker">4</div>
+            <div class="timeline-content glass-card google-target-card">
+              <div class="timeline-status-tag target">🌟 Asosiy Maqsad</div>
+              <h3>4-Bosqich: Senior Dasturchi @ Google</h3>
+              <p>
+                Xalqaro darajadagi muhandis bo'lib yetishish, Google jamoasida
+                global miqyosdagi innovatsion texnologiyalarni yaratishda
+                ishtirok etish.
+              </p>
+              <div class="tags">
+                <span class="tag tag-google">Google</span>
+                <span class="tag tag-google">Senior Engineer</span>
+                <span class="tag tag-google">World-Class Impact</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. LOYIHALAR (PROJECTS) -->
+      <section id="projects" class="section container">
+        <div class="section-header">
+          <span class="section-badge">Amaliyot</span>
+          <h2 class="section-title">Tanlangan Loyihalar</h2>
+          <p class="section-subtitle">
+            O'rganish jarayonida tayyorlangan amaliy ishlarim.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Loyiha 1 -->
+          <div class="project-card glass-card">
+            <div class="project-preview preview-1">
+              <div class="preview-overlay">
+                <span class="badge-tech">HTML5 &bull; CSS3</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3>Bobur dasturchi Shaxsiy Portfoliosi</h3>
+              <p>
+                Premium dark-mode, Glassmorphism effekti va toza semantik kod
+                bilan tayyorlangan shaxsiy tashrif qog'ozi.
+              </p>
+              <div class="project-tags">
+                <span>HTML5</span>
+                <span>Premium CSS</span>
+                <span>Responsive</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Loyiha 2 -->
+          <div class="project-card glass-card">
+            <div class="project-preview preview-2">
+              <div class="preview-overlay">
+                <span class="badge-tech">Obsidian &bull; PKM</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3>Raqamli Bilimlar Ombori (Second Brain)</h3>
+              <p>
+                Obsidian dasturida o'zaro bog'langan qaydlar, konspektlar va
+                o'quv rejalari bilan tuzilgan shaxsiy tizim.
+              </p>
+              <div class="project-tags">
+                <span>Obsidian</span>
+                <span>Markdown</span>
+                <span>PKM</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Loyiha 3 -->
+          <div class="project-card glass-card">
+            <div class="project-preview preview-3">
+              <div class="preview-overlay">
+                <span class="badge-tech">CSS Flex & Grid</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3>Zamonaviy Amaliy Veb Sahifalar</h3>
+              <p>
+                Mars IT maktabi va mustaqil darslar davomida yaratilgan turli
+                adaptiv veb-maketlar va landing pagelar.
+              </p>
+              <div class="project-tags">
+                <span>Flexbox</span>
+                <span>CSS Grid</span>
+                <span>UI/UX</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. MARS IT SCHOOL & MARS SPACE (PREMIUM REKLAMA VA TAVSIYA) -->
+      <section id="mars-space" class="section container">
+        <div class="mars-section-card glass-card">
+          <div class="mars-planet-glow"></div>
+          <div class="mars-content-wrap">
+            <div class="mars-badge">
+              <span class="mars-pulse"></span>
+              <span>🪐 Mening IT Maktabim &bull; Kelajak Kasblari</span>
+            </div>
+
+            <h2 class="mars-title">
+              Kelajak Shu Yerdan Boshlanadi:
+              <span class="mars-gradient-text"
+                >Mars IT School & Mars Space</span
+              >
+            </h2>
+
+            <p class="mars-desc">
+              Men o'z dasturlash sarguzashtimni va Frontend asoslarini aynan
+              <strong>Mars IT School</strong>da o'rganishdan boshladim.
+              <strong>Mars Space</strong> — bu shunchaki o'quv markazi emas,
+              balki yoshlarga haqiqiy zamonaviy dasturlash, kosmik darajadagi
+              amaliyot va mustaqil fikrlashni o'rgatuvchi eng ilg'or ta'lim
+              maskani!
+            </p>
+
+            <div class="mars-features-grid">
+              <div class="mars-feature-box">
+                <div class="mars-feat-icon">🚀</div>
+                <h4>Amaliy Ta'lim & Loyihalar</h4>
+                <p>
+                  Quruq nazariyasiz, har bir darsda mustaqil veb-saytlar va real
+                  amaliy loyihalar yaratish.
+                </p>
+              </div>
+
+              <div class="mars-feature-box">
+                <div class="mars-feat-icon">🪙</div>
+                <h4>Mars Coins & Gamifikatsiya</h4>
+                <p>
+                  O'qish, faollik va yutuqlar uchun maxsus Mars Coinlar yig'ib,
+                  qiziqarli sovg'alar va bilim yutib olish.
+                </p>
+              </div>
+
+              <div class="mars-feature-box">
+                <div class="mars-feat-icon">🌐</div>
+                <h4>Mars Space Platformasi</h4>
+                <p>
+                  Darslar, uyga vazifalar, reyting va o'sish dinamikasini qulay
+                  yagona ekotizim orqali kuzatish.
+                </p>
+              </div>
+            </div>
+
+            <div class="mars-cta-wrapper">
+              <a
+                href="https://marsit.uz"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-mars-fire"
+              >
+                <span>Mars IT School Saytiga O'tish</span>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                  ></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+              <div class="mars-quote-badge">
+                <span>⭐ Bobur dasturchi tavsiya etadi!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. BOG'LANISH (CONTACT) -->
+      <section id="contact" class="section container">
+        <div class="section-header">
+          <span class="section-badge">Muloqot</span>
+          <h2 class="section-title">Keling, bog'lanamiz!</h2>
+          <p class="section-subtitle">
+            Savollaringiz bormi yoki qiziqarli loyihalar ustida fikr
+            almashmoqchimisiz? Men bilan qulay usulda bog'lanishingiz mumkin.
+          </p>
+        </div>
+
+        <div class="contact-cards-grid">
+          <!-- Telegram Card -->
+          <div class="glass-card contact-premium-card card-telegram">
+            <div class="card-glow-aura aura-tg"></div>
+            <div class="contact-card-header">
+              <div class="contact-channel-icon icon-tg">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </div>
+              <div class="contact-channel-meta">
+                <span class="channel-label">Telegram Profil</span>
+                <h3 class="channel-username">@Mirboboyev_08</h3>
+              </div>
+              <span class="status-badge-mini">Online</span>
+            </div>
+
+            <p class="contact-channel-desc">
+              Eng tezkor aloqa yo'li. Telegram orqali istalgan vaqtda fikr,
+              savol yoki takliflaringizni yozishingiz mumkin.
+            </p>
+
+            <div class="contact-btn-group">
+              <a
+                href="https://t.me/Mirboboyev_08"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-tg"
+              >
+                <span>Telegramda yozish</span>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                  ></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+              <button
+                class="btn btn-glass copy-btn"
+                data-copy="https://t.me/Mirboboyev_08"
+                title="Havolani nusxalash"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path
+                    d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                  ></path>
+                </svg>
+                <span>Nusxa olish</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Phone Card -->
+          <div class="glass-card contact-premium-card card-phone">
+            <div class="card-glow-aura aura-phone"></div>
+            <div class="contact-card-header">
+              <div class="contact-channel-icon icon-phone">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="contact-channel-meta">
+                <span class="channel-label">Telefon Qo'ng'iroq</span>
+                <h3 class="channel-username">+998 (99) 138-08-10</h3>
+              </div>
+              <span class="status-badge-mini phone-status">Faol</span>
+            </div>
+
+            <p class="contact-channel-desc">
+              To'g'ridan-to'g'ri telefon muloqoti yoki SMS xabarlar uchun
+              shaxsiy aloqa raqami.
+            </p>
+
+            <div class="contact-btn-group">
+              <a href="tel:+998991380810" class="btn btn-phone">
+                <span>Qo'ng'iroq qilish</span>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+              <button
+                class="btn btn-glass copy-btn"
+                data-copy="+998991380810"
+                title="Raqamni nusxalash"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path
+                    d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                  ></path>
+                </svg>
+                <span>Nusxa olish</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pastki ilhomlantiruvchi iqtibos kartasi -->
+        <div class="contact-banner glass-card">
+          <div class="banner-quote-wrapper">
+            <div class="banner-quote-icon">“</div>
+            <blockquote>
+              "Har qanday buyuk natija kichik qadamlar va qat'iyat bilan
+              boshlanadi. <span class="dynamic-age">13</span> yosh — katta
+              marralar uchun ayni boshlanish davri!"
+            </blockquote>
+          </div>
+          <div class="banner-author">
+            <div class="author-avatar">BM</div>
+            <div>
+              <strong>Bobur Mirboboyev</strong>
+              <p>Bobur dasturchi &bull; 10-maktab &bull; Mars Space</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Toast Xabarnomasi (Nusxa olinganda chiqadi) -->
+      <div id="toast" class="toast">
+        <span class="toast-icon">✨</span>
+        <span id="toast-text">Ma'lumot nusxalandi!</span>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <p>
+          &copy; 2026 <strong>Bobur dasturchi</strong>. Barcha huquqlar
+          himoyalangan.
+        </p>
+        <p class="footer-note">HTML5 & Premium CSS bilan maxsus yaratildi ✨</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
