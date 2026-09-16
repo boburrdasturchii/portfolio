@@ -109,35 +109,70 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const soundToggleBtn = document.getElementById("sound-toggle-btn");
+  const mobileSoundToggleBtn = document.getElementById("mobile-sound-toggle-btn");
+
   function updateSoundBtnUI() {
-    if (!soundToggleBtn) return;
-    if (audioEnabled) {
-      soundToggleBtn.classList.add("active");
-      soundToggleBtn.setAttribute("title", "Ovoz effekti: Yoqilgan");
-      soundToggleBtn.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-        </svg>
-        <span class="btn-tooltip">Ovoz: Yoqilgan</span>
-      `;
-    } else {
-      soundToggleBtn.classList.remove("active");
-      soundToggleBtn.setAttribute("title", "Ovoz effekti: O'chirilgan");
-      soundToggleBtn.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <line x1="23" y1="9" x2="17" y2="15"></line>
-          <line x1="17" y1="9" x2="23" y2="15"></line>
-        </svg>
-        <span class="btn-tooltip">Ovoz: O'chiq</span>
-      `;
+    const soundOnSvg = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+      </svg>
+    `;
+    const soundOffSvg = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <line x1="23" y1="9" x2="17" y2="15"></line>
+        <line x1="17" y1="9" x2="23" y2="15"></line>
+      </svg>
+    `;
+
+    if (soundToggleBtn) {
+      if (audioEnabled) {
+        soundToggleBtn.classList.add("active");
+        soundToggleBtn.setAttribute("title", "Ovoz effekti: Yoqilgan");
+        soundToggleBtn.innerHTML = soundOnSvg;
+      } else {
+        soundToggleBtn.classList.remove("active");
+        soundToggleBtn.setAttribute("title", "Ovoz effekti: O'chirilgan");
+        soundToggleBtn.innerHTML = soundOffSvg;
+      }
+    }
+
+    if (mobileSoundToggleBtn) {
+      if (audioEnabled) {
+        mobileSoundToggleBtn.classList.add("active");
+        mobileSoundToggleBtn.innerHTML = `
+          <span class="mobile-action-icon">🔊</span>
+          <span class="mobile-sound-text">Ovoz: Yoqilgan</span>
+        `;
+      } else {
+        mobileSoundToggleBtn.classList.remove("active");
+        mobileSoundToggleBtn.innerHTML = `
+          <span class="mobile-action-icon">🔇</span>
+          <span class="mobile-sound-text">Ovoz: O'chiq</span>
+        `;
+      }
     }
   }
   updateSoundBtnUI();
 
   if (soundToggleBtn) {
     soundToggleBtn.addEventListener("click", () => {
+      audioEnabled = !audioEnabled;
+      localStorage.setItem("bobur_audio_fx", audioEnabled ? "true" : "false");
+      if (audioEnabled) {
+        initAudio();
+        playKeyClick("enter");
+        showToast("Ovoz effektlari yoqildi! 🎵");
+      } else {
+        showToast("Ovoz effektlari o'chirildi.");
+      }
+      updateSoundBtnUI();
+    });
+  }
+
+  if (mobileSoundToggleBtn) {
+    mobileSoundToggleBtn.addEventListener("click", () => {
       audioEnabled = !audioEnabled;
       localStorage.setItem("bobur_audio_fx", audioEnabled ? "true" : "false");
       if (audioEnabled) {
@@ -231,16 +266,27 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isOpen) {
         navDropdownMenu.classList.remove("open");
         navDropdownBtn.classList.remove("active");
+        navDropdownBtn.setAttribute("aria-expanded", "false");
       } else {
         navDropdownMenu.classList.add("open");
         navDropdownBtn.classList.add("active");
+        navDropdownBtn.setAttribute("aria-expanded", "true");
       }
     });
 
     document.addEventListener("click", (e) => {
-      if (!navDropdownMenu.contains(e.target) && e.target !== navDropdownBtn) {
+      if (!navDropdownMenu.contains(e.target) && !navDropdownBtn.contains(e.target)) {
         navDropdownMenu.classList.remove("open");
         navDropdownBtn.classList.remove("active");
+        navDropdownBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        navDropdownMenu.classList.remove("open");
+        navDropdownBtn.classList.remove("active");
+        navDropdownBtn.setAttribute("aria-expanded", "false");
       }
     });
 
@@ -248,6 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
       link.addEventListener("click", () => {
         navDropdownMenu.classList.remove("open");
         navDropdownBtn.classList.remove("active");
+        navDropdownBtn.setAttribute("aria-expanded", "false");
         playKeyClick("enter");
       });
     });
@@ -269,19 +316,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuToggleBtn = document.getElementById("menu-toggle-btn");
   const mobileMenuDrawer = document.getElementById("mobile-menu-drawer");
   const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
+  const mobileMenuCloseBtn = document.getElementById("mobile-menu-close-btn");
   const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+  const mobileMatrixToggleBtn = document.getElementById("mobile-matrix-toggle-btn");
 
   function toggleMobileMenu() {
     const isOpen = mobileMenuDrawer.classList.contains("open");
     if (isOpen) {
       mobileMenuDrawer.classList.remove("open");
       mobileMenuOverlay.classList.remove("open");
-      menuToggleBtn.classList.remove("active");
+      if (menuToggleBtn) menuToggleBtn.classList.remove("active");
       document.body.style.overflow = "";
     } else {
       mobileMenuDrawer.classList.add("open");
       mobileMenuOverlay.classList.add("open");
-      menuToggleBtn.classList.add("active");
+      if (menuToggleBtn) menuToggleBtn.classList.add("active");
       document.body.style.overflow = "hidden";
     }
   }
@@ -293,13 +342,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  if (mobileMenuCloseBtn) {
+    mobileMenuCloseBtn.addEventListener("click", () => {
+      playKeyClick("key");
+      toggleMobileMenu();
+    });
+  }
+
   if (mobileMenuOverlay) {
     mobileMenuOverlay.addEventListener("click", toggleMobileMenu);
   }
 
+  if (mobileMatrixToggleBtn) {
+    mobileMatrixToggleBtn.addEventListener("click", () => {
+      playKeyClick("key");
+      toggleMatrixRain();
+    });
+  }
+
   mobileNavLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      toggleMobileMenu();
+      if (mobileMenuDrawer && mobileMenuDrawer.classList.contains("open")) {
+        toggleMobileMenu();
+      }
     });
   });
 
@@ -775,10 +840,14 @@ Interaktiv platforma, amaliy darslar va Mars Coinlar ekotizimi! Tavsiya etiladi!
 
     if (matrixActive) {
       matrixCanvas.classList.add("active");
+      if (matrixToggleBtn) matrixToggleBtn.classList.add("active");
+      if (mobileMatrixToggleBtn) mobileMatrixToggleBtn.classList.add("active");
       initMatrix();
       showToast("Matrix kiber yomg'iri yoqildi! 🟩");
     } else {
       matrixCanvas.classList.remove("active");
+      if (matrixToggleBtn) matrixToggleBtn.classList.remove("active");
+      if (mobileMatrixToggleBtn) mobileMatrixToggleBtn.classList.remove("active");
       clearInterval(matrixInterval);
       showToast("Matrix effekti o'chirildi.");
     }
