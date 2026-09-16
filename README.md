@@ -61,6 +61,11 @@ Ushbu loyiha **Bobur Mirboboyev** (13 yosh, 10-maktab va Mars IT School o'quvchi
 12. **🎂 Dinamik Yosh Hisoblash:**
     - Tug'ilgan kun: 8-noyabr 2012-yil. Har yili 8-noyabr sanasi kelganda, saytdagi barcha yosh ko'rsatkichlari avtomatik ravishda 1 yoshga oshadi.
 
+13. **🧭 Ultra-Zamonaviy Suzuvchi Kapsula Navbar & Command Palette (Ctrl+K):**
+    - Ekranning yuqori qismida havoda suzib turuvchi shishasimon (Floating Glass Island) dizayn.
+    - Har bir bo'lim uchun chiroyli mini-ikonkalar, faol holat nurlari va interaktiv bo'limlar uchun silliq Dropdown menyu.
+    - Tezkor Qidiruv (Spotlight / Command Palette): istalgan vaqtda `Ctrl + K` tugmasini bosib, saytdagi barcha bo'limlar, loyihalar va aloqalarga 1 soniyada o'tish imkoniyati!
+
 ---
 
 ## 📂 Fayllar tuzilmasi:
